@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b0a">
+<title>M360 ICT — Four Year Countdown</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #080b0a;
+  --surface: rgba(255,255,255,.045);
+  --surface-hover: rgba(255,255,255,.075);
+  --text: #f5f7f5;
+  --muted: #929a95;
+  --border: rgba(255,255,255,.11);
+  --accent: #b7ff65;
+  --accent-soft: rgba(183,255,101,.12);
+  --grid-line: rgba(255,255,255,.035);
+  --orb-one: rgba(93,180,82,.22);
+  --orb-two: rgba(48,123,173,.17);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f4f6f1;
+  --surface: rgba(255,255,255,.68);
+  --surface-hover: rgba(255,255,255,.95);
+  --text: #151a16;
+  --muted: #6f776f;
+  --border: rgba(20,35,20,.12);
+  --accent: #3e8124;
+  --accent-soft: rgba(62,129,36,.09);
+  --grid-line: rgba(20,35,20,.045);
+  --orb-one: rgba(143,215,112,.22);
+  --orb-two: rgba(107,180,216,.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  transition: background .4s, color .4s;
+}
+
+button {
+  font: inherit;
+}
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--orb-one), transparent 55%),
+    var(--bg);
+  transition: background .4s;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.orb {
+  position: absolute;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  filter: blur(95px);
+  opacity: .8;
+  will-change: transform;
+}
+
+.orb-one {
+  background: var(--orb-one);
+  top: -180px;
+  left: -150px;
+  animation: drift-one 20s ease-in-out infinite alternate;
+}
+
+.orb-two {
+  background: var(--orb-two);
+  right: -180px;
+  bottom: -170px;
+  animation: drift-two 24s ease-in-out infinite alternate;
+}
+
+.orb-three {
+  width: 260px;
+  height: 260px;
+  background: var(--orb-one);
+  left: 45%;
+  top: 45%;
+  opacity: .35;
+  animation: drift-three 19s ease-in-out infinite alternate;
+}
+
+@keyframes drift-one {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(180px, 150px) scale(1.15); }
+}
+
+@keyframes drift-two {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-160px, -130px) scale(1.2); }
+}
+
+@keyframes drift-three {
+  from { transform: translate(-80px, 50px); }
+  to { transform: translate(100px, -100px); }
+}
+
+.page {
+  position: relative;
+  width: min(100% - 48px, 1040px);
+  margin: 0 auto;
+  padding: 34px 0 26px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--accent);
+  background: var(--surface);
+}
+
+.logo svg {
+  width: 22px;
+  height: 22px;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.06em;
+}
+
+.brand-sub {
+  margin-top: 2px;
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  color: var(--muted);
+  background: var(--surface);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .4; box-shadow: 0 0 3px var(--accent); }
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: background .25s, transform .25s;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-hover);
+  transform: rotate(8deg);
+}
+
+.theme-toggle svg {
+  width: 19px;
+  height: 19px;
+}
+
+.hero {
+  width: 100%;
+  margin: auto 0;
+  padding: 90px 0 100px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--accent);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  margin-bottom: 27px;
+  animation: reveal .8s .05s both;
+}
+
+.eyebrow-line {
+  width: 25px;
+  height: 1px;
+  background: var(--accent);
+}
+
+h1 {
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 600;
+  letter-spacing: -.085em;
+  line-height: .99;
+  max-width: 850px;
+  animation: reveal .9s .12s both;
+}
+
+h1 .highlight {
+  color: var(--accent);
+}
+
+.description {
+  margin-top: 24px;
+  max-width: 490px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+  animation: reveal .9s .2s both;
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.countdown-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  margin-top: 6px;
+}
+
+.target-date {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  text-align: right;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tile {
+  position: relative;
+  min-width: 0;
+  min-height: 145px;
+  padding: 23px 14px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: border-color .3s, background .3s, transform .3s;
+  animation: tile-in .7s both;
+}
+
+.tile:nth-child(2) { animation-delay: .06s; }
+.tile:nth-child(3) { animation-delay: .12s; }
+.tile:nth-child(4) { animation-delay: .18s; }
+.tile:nth-child(5) { animation-delay: .24s; }
+.tile:nth-child(6) { animation-delay: .30s; }
+.tile:nth-child(7) { animation-delay: .36s; }
+.tile:nth-child(8) { animation-delay: .42s; }
+
+@keyframes tile-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 14px;
+  right: 14px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.tile:hover {
+  background: var(--surface-hover);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  transform: translateY(-4px);
+}
+
+.tile:hover::before {
+  opacity: .8;
+}
+
+.tile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.tile-index {
+  color: var(--muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+
+.tile-symbol {
+  color: var(--accent);
+  font-size: 12px;
+  opacity: .8;
+}
+
+.value {
+  margin-top: 20px;
+  font-family: "DM Mono", monospace;
+  font-size: clamp(25px, 3.5vw, 42px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -.075em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.label {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.tile.microseconds .value {
+  font-size: clamp(19px, 2.4vw, 27px);
+  letter-spacing: -.035em;
+}
+
+.tile.milliseconds .value {
+  font-size: clamp(25px, 3.1vw, 36px);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  margin-top: 34px;
+}
+
+.signature {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.signature strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.footer-note {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+}
+
+@media (min-width: 1200px) {
+  .hero {
+    padding-top: 105px;
+    padding-bottom: 110px;
+  }
+
+  .tile {
+    min-height: 155px;
+  }
+}
+
+@media (max-width: 650px) {
+  .page {
+    width: calc(100% - 32px);
+    padding-top: 22px;
+  }
+
+  .hero {
+    padding: 72px 0 58px;
+  }
+
+  h1 {
+    font-size: clamp(43px, 11vw, 68px);
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .tile {
+    min-height: 125px;
+    padding: 18px 13px;
+  }
+
+  .value {
+    font-size: clamp(28px, 7vw, 38px);
+  }
+
+  .tile.microseconds .value {
+    font-size: clamp(21px, 5.4vw, 27px);
+  }
+
+  .tile.milliseconds .value {
+    font-size: clamp(26px, 6.5vw, 34px);
+  }
+
+  .bottom {
+    align-items: flex-start;
+  }
+
+  .footer-note {
+    max-width: 48%;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 370px) {
+  .brand-name { font-size: 16px; }
+  .brand-sub { font-size: 9px; }
+  .live { padding: 8px; font-size: 9px; }
+  .header-right { gap: 7px; }
+  .tile { padding: 16px 8px; }
+  .tile.microseconds .value { font-size: 19px; }
+  .target-date { font-size: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="background" aria-hidden="true">
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+  <div class="orb orb-three"></div>
+</div>
+
+<div class="page">
+
+  <header class="header">
+    <div class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 17.5 10 5l4 8 2-4 4 8.5H4Z"
+            stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M4 20h16" stroke="currentColor"
+            stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">M360 ICT<span style="color:var(--accent)">.</span></div>
+        <div class="brand-sub">Personal milestone</div>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <div class="live">
+        <span class="live-dot"></span>
+        <span id="live-label">Live countdown</span>
+      </div>
+
+      <button class="theme-toggle" id="theme-btn"
+        type="button" aria-label="Switch color theme">
+        <svg id="sun-icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/>
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"
+            stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <svg id="moon-icon" viewBox="0 0 24 24" fill="none" style="display:none">
+          <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"
+            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="eyebrow">
+      <span class="eyebrow-line"></span>
+      A journey worth counting
+    </div>
+
+    <h1>
+      Four years.<br>
+      One <span class="highlight">milestone.</span>
+    </h1>
+
+    <p class="description">
+      Every second brings the next chapter closer.
+      The journey continues — count down to the next big milestone.
+    </p>
+  </main>
+
+  <section aria-label="Countdown to four year milestone">
+    <div class="countdown-heading">
+      <div>
+        <div class="section-title" id="countdown-title">Time remaining</div>
+        <div class="section-subtitle" id="countdown-subtitle">
+          UNTIL THE NEXT MILESTONE
+        </div>
+      </div>
+      <div class="target-date">
+        TARGET DATE<br>
+        <span style="color:var(--text)">01 SEP 2030</span>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <footer class="bottom">
+    <div class="signature">Designed for <strong>Reduan Mridha</strong></div>
+    <div class="footer-note">
+      DHAKA, BANGLADESH · UTC+6<br>
+      <span id="footer-status">COUNTING EVERY MOMENT</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const OFFSET = 6 * 60 * 60 * 1000;
+
+  // 1 September 2030, 00:00 in Dhaka.
+  const TARGET = Date.UTC(2030, 8, 1, 0, 0, 0) - OFFSET;
+
+  const units = [
+    { key: "years", label: "Years", index: "01", symbol: "↗" },
+    { key: "months", label: "Months", index: "02", symbol: "↗" },
+    { key: "days", label: "Days", index: "03", symbol: "↗" },
+    { key: "hours", label: "Hours", index: "04", symbol: "↗" },
+    { key: "minutes", label: "Minutes", index: "05", symbol: "↗" },
+    { key: "seconds", label: "Seconds", index: "06", symbol: "↗" },
+    { key: "milliseconds", label: "Milliseconds", index: "07", symbol: "↗" },
+    { key: "microseconds", label: "Microseconds", index: "08", symbol: "↗" }
+  ];
+
+  const grid = document.getElementById("grid");
+
+  units.forEach(function (unit) {
+    const tile = document.createElement("div");
+    tile.className = "tile " + unit.key;
+
+    const top = document.createElement("div");
+    top.className = "tile-top";
+
+    const index = document.createElement("span");
+    index.className = "tile-index";
+    index.textContent = unit.index;
+
+    const symbol = document.createElement("span");
+    symbol.className = "tile-symbol";
+    symbol.textContent = unit.symbol;
+
+    top.append(index, symbol);
+
+    const value = document.createElement("div");
+    value.className = "value";
+    value.id = "v-" + unit.key;
+    value.textContent = "0";
+
+    const label = document.createElement("div");
+    label.className = "label";
+    label.textContent = unit.label;
+
+    tile.append(top, value, label);
+    grid.appendChild(tile);
+  });
+
+  function dhakaDate(timestamp) {
+    // UTC fields represent Dhaka wall-clock fields.
+    return new Date(timestamp + OFFSET);
+  }
+
+  function daysInMonth(year, month) {
+    return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  }
+
+  function addMonths(date, amount) {
+    const total = date.getUTCFullYear() * 12
+      + date.getUTCMonth() + amount;
+
+    const year = Math.floor(total / 12);
+    const month = total - year * 12;
+    const day = Math.min(date.getUTCDate(), daysInMonth(year, month));
+
+    return new Date(Date.UTC(
+      year, month, day,
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds(),
+      date.getUTCMilliseconds()
+    ));
+  }
+
+  function calendarBreakdown(start, end) {
+    let years = end.getUTCFullYear() - start.getUTCFullYear();
+    let anchor = addMonths(start, years * 12);
+
+    if (anchor > end) {
+      years--;
+      anchor = addMonths(start, years * 12);
+    }
+
+    let months =
+      (end.getUTCFullYear() - anchor.getUTCFullYear()) * 12
+      + end.getUTCMonth() - anchor.getUTCMonth();
+
+    let monthAnchor = addMonths(anchor, months);
+
+    if (monthAnchor > end) {
+      months--;
+      monthAnchor = addMonths(anchor, months);
+    }
+
+    let remaining = end.getTime() - monthAnchor.getTime();
+
+    const days = Math.floor(remaining / 86400000);
+    remaining -= days * 86400000;
+
+    const hours = Math.floor(remaining / 3600000);
+    remaining -= hours * 3600000;
+
+    const minutes = Math.floor(remaining / 60000);
+    remaining -= minutes * 60000;
+
+    const seconds = Math.floor(remaining / 1000);
+    remaining -= seconds * 1000;
+
+    const milliseconds = remaining;
+
+    return {
+      years,
+      months,
+      days,
+      hours,
+      minutes,
+      seconds,
+      milliseconds
+    };
+  }
+
+  function render() {
+    const now = Date.now();
+    const past = now >= TARGET;
+
+    const start = dhakaDate(past ? TARGET : now);
+    const end = dhakaDate(past ? now : TARGET);
+
+    const parts = calendarBreakdown(start, end);
+
+    document.getElementById("countdown-title").textContent =
+      past ? "Time elapsed" : "Time remaining";
+
+    document.getElementById("countdown-subtitle").textContent =
+      past ? "SINCE THE FOUR YEAR MILESTONE" : "UNTIL THE FOUR YEAR MILESTONE";
+
+    document.getElementById("live-label").textContent =
+      past ? "Milestone reached" : "Live countdown";
+
+    document.getElementById("footer-status").textContent =
+      past ? "THE JOURNEY CONTINUES" : "COUNTING EVERY MOMENT";
+
+    units.forEach(function (unit) {
+      let value;
+
+      if (unit.key === "milliseconds") {
+        value = String(parts.milliseconds).padStart(3, "0");
+      } else if (unit.key === "microseconds") {
+        // Visual sub-millisecond display; not a true clock measurement.
+        const fraction = performance.now() % 1;
+        value = String(
+          parts.milliseconds * 1000 + Math.floor(fraction * 1000)
+        ).padStart(6, "0");
+      } else {
+        value = String(parts[unit.key]);
+      }
+
+      document.getElementById("v-" + unit.key).textContent = value;
+    });
+  }
+
+  render();
+
+  // A short interval updates the timer without a permanent 60fps loop.
+  const timer = setInterval(render, 50);
+
+  // Theme toggle with saved preference.
+  const root = document.documentElement;
+  const button = document.getElementById("theme-btn");
+  const sun = document.getElementById("sun-icon");
+  const moon = document.getElementById("moon-icon");
+
+  function applyTheme(theme) {
+    root.setAttribute("data-theme", theme);
+    sun.style.display = theme === "dark" ? "block" : "none";
+    moon.style.display = theme === "dark" ? "none" : "block";
+
+    try {
+      localStorage.setItem("m360-theme", theme);
+    } catch (error) {}
+  }
+
+  let savedTheme = null;
+
+  try {
+    savedTheme = localStorage.getItem("m360-theme");
+  } catch (error) {}
+
+  const initialTheme = savedTheme ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark" : "light");
+
+  applyTheme(initialTheme);
+
+  button.addEventListener("click", function () {
+    applyTheme(root.getAttribute("data-theme") === "dark"
+      ? "light" : "dark");
+  });
+
+  // Cleanup if the page is ever unloaded.
+  window.addEventListener("pagehide", function () {
+    clearInterval(timer);
+  });
+})();
+</script>
+</body>
+</html>
